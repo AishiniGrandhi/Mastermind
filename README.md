@@ -55,10 +55,11 @@ AI turns.
 ```bash
 git clone https://github.com/yourusername/Mastermind
 
-2. Compile all files
 
+2. Compile all files
+```
 javac *.java
 
 3. Run the game
-
+```
 java MastermindBoardGUI
