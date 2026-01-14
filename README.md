@@ -63,4 +63,3 @@ javac *.java
 ```
 java MastermindBoardGUI
 
----
