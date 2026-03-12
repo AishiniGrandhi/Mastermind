@@ -92,7 +92,7 @@ public class MastermindBoardGUI extends JPanel {
             // 3. Trigger Bot using GREEDY selection from BFS Navigator
             if (!isHumanTurn) {
                 Timer botTimer = new Timer(800, e -> {
-                    int[] botMove = navigator.getGreedyMove();
+                    int[] botMove = navigator.getImprovedGreedyMove();
                     if (botMove != null) {
                         currentGuess = botMove.clone();
                         submitGuess();
