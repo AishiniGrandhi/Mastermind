@@ -7,10 +7,17 @@ public class MastermindEngine {
     private final int[] secretCode;
     private final Random random = new Random();
 
+    //DP TABLE
+    private int[][][] feedbackTable;
+    private List<int[]> allCodes;
+
     public MastermindEngine() {
         secretCode = new int[SLOTS];
         for (int i = 0; i < SLOTS; i++)
             secretCode[i] = random.nextInt(COLORS);
+
+        allCodes = generateAllGraphVertices();
+        buildFeedbackTable();
     }
 
     // GRAPH GENERATION: Brute-force generation of all Vertices (V)
@@ -27,6 +34,43 @@ public class MastermindEngine {
             }
         }
         return vertices;
+    }
+
+    private void buildFeedbackTable() {
+
+        int n = allCodes.size(); // 1296
+        feedbackTable = new int[n][n][2];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+
+                int[] guess = allCodes.get(i);
+                int[] secret = allCodes.get(j);
+
+                int[] fb = evaluateGuess(guess, secret);
+
+                feedbackTable[i][j][0] = fb[0];
+                feedbackTable[i][j][1] = fb[1];
+            }
+        }
+    }
+
+    public int[] getFeedbackDP(int[] guess, int[] secret) {
+
+        int guessID = codeToID(guess);
+        int secretID = codeToID(secret);
+
+        return feedbackTable[guessID][secretID];
+    }
+
+    public int codeToID(int[] code) {
+        int id = 0;
+
+        for (int i = 0; i < SLOTS; i++) {
+            id = id * COLORS + code[i];
+        }
+
+        return id;
     }
 
     public int[] evaluateGuess(int[] guess, int[] secret) {
