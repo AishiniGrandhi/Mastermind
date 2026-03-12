@@ -4,7 +4,7 @@ Mastermind game implemented in Java with an AI solver based on **graph traversal
 
 <img width="683" height="655" alt="image" src="https://github.com/user-attachments/assets/ef91857d-69f5-4fdb-ab6e-28974324eb68" />
 
-
+---
 # Overview
 
 This project is an advanced **Java-based implementation of the Mastermind game** featuring an intelligent AI solver.
